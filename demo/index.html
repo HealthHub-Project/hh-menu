@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>hh-menu demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../hh-menu.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>This is a plain paper-dropdown-menu</h3>
+      <demo-snippet>
+        <template>
+          <hh-menu></hh-menu>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>They can be styled using custom properties</h3>
+      <demo-snippet>
+        <template>
+          <style>
+            .container {
+              height: 51px;
+            }
+            .custom {
+              --menu-color: gray;
+              --menu-label-color: black;
+              --menu-hover-color: black;
+              --menu-label-hover-color : yellow;
+            }
+          </style>
+          <div class="container">
+            <hh-menu class="custom"></hh-menu>
+          </div>
+        </template>
+
+
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>They can be initialized menu using properties</h3>
+      <demo-snippet>
+        <template>
+          <hh-menu id="demo3_menu"></hh-menu>
+          <script>
+            let demo3_menuItems = [
+                {
+                    "name": "Display",
+                    "icon": "vaadin:viewport",
+                    "size": 150,
+                    "childNode": [
+                        {
+                            "id": "layout",
+                            "name": "Layout",
+                            "icon": "vaadin:grid-bevel",
+                        },
+                        {
+                            "separator": true
+                        },
+                        {
+                            "name": "DDP",
+                            "icon": "vaadin:viewport",
+                            "size": 130,
+                            "childNode": [
+                                {
+                                    "id": "dd1",
+                                    "name": "DDP 1",
+                                    "icon": "vaadin:grid-big"
+                                },
+                                {
+                                    "id": "dd2",
+                                    "name": "DDP 2",
+                                    "icon": "vaadin:grid-big"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ];
+
+            demo3_menu.menuItems = demo3_menuItems;
+
+          </script>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>They can be click event using custom method</h3>
+      <demo-snippet>
+        <template>
+          <hh-menu id="demo4_menu"></hh-menu>
+          <script>
+              let demo4_menuItems = [
+                  {
+                      "name": "Display",
+                      "icon": "vaadin:viewport",
+                      "size": 150,
+                      "childNode": [
+                          {
+                              "name": "DDP",
+                              "icon": "vaadin:viewport",
+                              "size": 130,
+                              "childNode": [
+                                  {
+                                      "id": "dd1",
+                                      "name": "DDP 1",
+                                      "icon": "vaadin:grid-big"
+                                  },
+                                  {
+                                      "id": "dd2",
+                                      "name": "DDP 2",
+                                      "icon": "vaadin:grid-big"
+                                  }
+                                  ,
+                                  {
+                                      "id": "dd3",
+                                      "name": "DDP 3",
+                                      "icon": "vaadin:grid-big",
+                                      "suppressMenu": true
+                                  }
+                              ]
+                          }
+                      ]
+                  }
+              ];
+              demo4_menu.menuItems = demo4_menuItems;
+              demo4_menu.addEventListener('menuItemClickEvent', function (e) {
+                  switch(e.detail.id) {
+                      case "dd1":
+                          demo4_menu.toggleCheckItem(e.detail.id);
+                          break;
+                      case "dd2":
+                          demo4_menu.checkItem(e.detail.id);
+                          break;
+                  }
+              })
+
+          </script>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>

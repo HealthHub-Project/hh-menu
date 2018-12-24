@@ -1,0 +1,356 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../paper-item/paper-icon-item.html">
+<link rel="import" href="../iron-image/iron-image.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../vaadin-icons/vaadin-icons.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../iron-icons/editor-icons.html">
+<link rel="import" href="../iron-icons/av-icons.html">
+<link rel="import" href="../iron-icons/device-icons.html">
+<link rel="import" href="../iron-icons/hardware-icons.html">
+<link rel="import" href="../iron-icons/maps-icons.html">
+<link rel="import" href="../iron-icons/image-icons.html">
+<link rel="import" href="../iron-icons/notification-icons.html">
+<link rel="import" href="../iron-icons/places-icons.html">
+<link rel="import" href="../iron-icons/social-icons.html">
+<link rel="import" href="../iron-icons/communication-icons.html">
+<link rel="import" href="../hh-icons/hh-icons.html">
+
+<link rel="import" href="hh-menu-item.html">
+
+<!--
+### Desc
+상단 메인메뉴 컴포넌트
+Create by joohyukjung on 2018. 11. 5. PM 12:50
+
+### Styling
+default mix-height : 31px;
+default subMenu width : 200px;
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--filmbox-menu-color`       | filmbox menu background-color | #1d1e25
+`--filmbox-menu-label-color` | filmbox menu text label color | #ccc
+`--filmbox-menu-hover-color` | filmbox menu hover color      | #ccc
+
+-->
+<dom-module id="hh-menu">
+    <template>
+        <style>
+            :host {
+                display: block;
+                --menu-color: #1d1e25;
+                --menu-label-color: #ccc;
+                --menu-label-hover-color: #fff;
+                --menu-hover-color: #0087cb;
+                /*width: 100%;*/
+                height: 100%;
+            }
+
+            nav {
+                width: 100%;
+                height: 100%;
+                background-color: var(--menu-color);
+            }
+
+            nav ul {
+                list-style-type: none;
+                /*position: relative;*/
+                margin: 0;
+                padding: 0;
+            }
+
+            nav ul li {
+                position: relative;
+                float: left;
+                margin: 0;
+                padding: 0;
+                z-index: 1;
+                height: 100%;
+            }
+
+            nav ul ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                padding: 0;
+            }
+
+            nav ul ul ul {
+                top: -6px;
+                left: 100%;
+                box-shadow: -5px 0px 20px -10px #000000;
+                border-radius: 7px;
+            }
+
+            .navBar-flex-left {
+                display: flex;
+                /*float: left;*/
+                height: 100%;
+            }
+
+            .menuBar-left-logo {
+                width: 31px;
+            }
+
+            .menuBar-left-menu:hover > paper-icon-item{
+                color: var(--menu-label-hover-color);
+                background-color: var(--menu-hover-color);
+                cursor: default;
+            }
+
+            .menuBar-left-menu > paper-icon-item {
+                color: var(--menu-label-color);
+                font-size: 15px;
+                padding-left: 10px;
+                padding-right: 12px;
+                /*메뉴아이콘아이템 높이*/
+                --paper-item-min-height: 31px;
+                /*메뉴아이콘과 메뉴명 사이의 간격*/
+                --paper-item-icon-width: 18px;
+                height: 100%;
+            }
+
+            .menuBar-left-menu > paper-icon-item > iron-icon {
+                width: 15px;
+                height: 15px;
+            }
+
+            .log-container {
+                width: 100%;
+                height: 100%;
+                text-align: center;
+            }
+
+            /*로고*/
+            .log-container > iron-image {
+                width: 60%;
+                height: 100%;
+                margin-left: 5px;
+                margin-right: 5px;
+            }
+
+            /*메뉴 아이템 리스트*/
+            .menu-item-list {
+                padding-top: 5px;
+                padding-bottom: 5px;
+                border-bottom-left-radius: 7px;
+                border-bottom-right-radius: 7px;
+                background-color: var(--menu-color);
+                border: 1px solid #4C5667;
+            }
+
+            .menu-item-list > div > paper-icon-item {
+                color: var(--menu-label-color);
+                font-size: 14px;
+                padding-left: 20px;
+                /*메뉴아이콘아이템 높이*/
+                --paper-item-min-height: 31px;
+                /*메뉴아이콘과 메뉴명 사이의 간격*/
+                --paper-item-icon-width: 22px;
+
+                --paper-item-disabled: {
+                    --menu-label-color: #4C5667;
+                }
+            }
+
+            .menu-item-list > div > paper-icon-item > iron-icon {
+                width: 16px;
+                height: 16px;
+            }
+
+            .menu-item-list > div > paper-icon-item:hover {
+                background-color: var(--menu-hover-color);
+                color: var(--menu-label-hover-color);
+                cursor: default;
+            }
+
+            .submenu-caret-right {
+                position: absolute;
+                right: 10px;
+            }
+
+            .menu-separator {
+                border-bottom: 1px solid #4C5667;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
+            .listbox {
+                width: 200px;
+            }
+
+            hh-menu-item {
+                --menu-item-hover-color: var(--menu-hover-color);
+                --menu-item-label-color: var(--menu-label-color);
+                --menu-item-label-hover-color: var(--menu-label-hover-color);
+            }
+        </style>
+
+
+        <nav>
+            <div class="navBar-flex-left">
+                <ul>
+                    <li class="menuBar-left-logo">
+                        <div class="log-container">
+                            <iron-image sizing="contain" alt="HPACS" src="../resource/logo.png"></iron-image>
+                        </div>
+                    </li>
+
+                    <template is="dom-repeat" items="{{menuItems}}" as="items">
+                        <li class="menuBar-left-menu" on-mouseenter="mouseenterEvent" on-mouseleave="mouseleaveEvent">
+                            <paper-icon-item id="{{items.id}}">
+                                <iron-icon icon="{{items.icon}}" slot="item-icon"></iron-icon>
+                                {{items.name}}
+                            </paper-icon-item>
+                            <ul class="menu-item-list">
+                                <div class="listbox" role="listbox" style$="width: {{items.size}}px;">
+                                    <template is="dom-repeat" items="{{items.childNode}}" as="childNode_1">
+                                        <template is="dom-if" if="{{!childNode_1.separator}}">
+                                            <template is="dom-if" if="{{!childNode_1.childNode}}">
+                                                <hh-menu-item id="{{childNode_1.id}}" item="{{childNode_1}}" on-click="clickEventListener"></hh-menu-item>
+                                            </template>
+
+                                            <template is="dom-if" if="{{childNode_1.childNode}}">
+                                                <paper-icon-item on-mouseenter="mouseenterEvent" on-mouseleave="mouseleaveEvent" disabled="{{childNode_1.suppressMenu}}">
+                                                    <iron-icon icon="{{childNode_1.icon}}" slot="item-icon"></iron-icon>
+                                                    {{childNode_1.name}}
+                                                    <iron-icon class="submenu-caret-right" icon="vaadin:caret-right"></iron-icon>
+                                                    <ul class="menu-item-list" style="border-radius: 7px">
+                                                        <div class="listbox" role="listbox" style$="width: {{childNode_1.size}}px;">
+                                                            <template is="dom-repeat" items="{{childNode_1.childNode}}" as="childNode_2">
+                                                                <hh-menu-item id="{{childNode_2.id}}" item="{{childNode_2}}" on-click="clickEventListener"></hh-menu-item>
+                                                            </template>
+                                                        </div>
+                                                    </ul>
+                                                </paper-icon-item>
+                                            </template>
+                                        </template>
+
+                                        <template is="dom-if" if="{{childNode_1.separator}}">
+                                            <div class="menu-separator"></div>
+                                        </template>
+
+                                    </template>
+                                </div>
+                            </ul>
+                        </li>
+                    </template>
+                </ul>
+            </div>
+        </nav>
+
+    </template>
+
+    <script>
+        /**
+         * `hh-menu`
+         *
+         *
+         * @customElement
+         * @polymer
+         * @demo demo/index.html
+         */
+        class HhMenu extends Polymer.Element {
+            static get is() {
+                return 'hh-menu';
+            }
+
+            constructor() {
+                super();
+                // _this = this;
+            }
+
+            ready() {
+                super.ready();
+            }
+
+            static get properties() {
+                return {
+                    menuItems: {
+                        type: Array,
+                        value() {
+                            return [
+                                {
+                                    name: 'Menu',
+                                    icon: 'healthhub:stackView',
+                                    size: 180,
+                                    childNode: [
+                                        {
+                                            id: 'subMenu1',
+                                            name: 'SubMenu1',
+                                            icon: 'vaadin:folder-open'
+                                        },
+                                        {
+                                            name: 'SubMenu2',
+                                            icon: 'vaadin:folder-open',
+                                            size: 180,
+                                            childNode: [
+                                                {
+                                                    id: 'subMenu2_1',
+                                                    name: 'SubMenu2_1',
+                                                    icon: 'vaadin:file-text'
+                                                },
+                                                {
+                                                    id: 'subMenu2_2',
+                                                    name: 'SubMenu2_2',
+                                                    icon: 'vaadin:file-text'
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "separator": true
+                                        },
+                                        {
+                                            id: 'subMenu3',
+                                            name: 'SubMenu3',
+                                            icon: 'vaadin:folder-open'
+                                        }
+                                    ]
+                                }
+                            ];
+                        }
+                    }
+                }
+            }
+
+            clickEventListener(e) {
+                if (!e.target.suppressMenu) {
+                    this.dispatchEvent(new CustomEvent('menuItemClickEvent', {detail: {id: e.target.getItemId()}}));
+                    e.target.parentElement.parentElement.style.display = null;
+                }
+            }
+
+            // menu item toggle check
+            toggleCheckItem(e) {
+                this.shadowRoot.querySelector('#' + e).toggleCheck();
+            }
+
+            // menu item check
+            checkItem(e) {
+                this.shadowRoot.querySelector('#' + e).check();
+            }
+
+            // menu item uncheck
+            unCheckItem(e) {
+                this.shadowRoot.querySelector('#' + e).unCheck();
+            }
+
+            mouseenterEvent(e) {
+                if (e.target.querySelector("ul")) {
+                    e.target.querySelector("ul").style.display = "block";
+                }
+            }
+
+            mouseleaveEvent(e) {
+                if (e.target.querySelector("ul")) {
+                    e.target.querySelector("ul").style.display = null;
+                }
+
+            }
+        }
+
+        window.customElements.define(HhMenu.is, HhMenu);
+    </script>
+</dom-module>
