@@ -28,9 +28,10 @@ default subMenu width : 200px;
 
 Custom property | Description | Default
 ----------------|-------------|----------
-`--filmbox-menu-color`       | filmbox menu background-color | #1d1e25
-`--filmbox-menu-label-color` | filmbox menu text label color | #ccc
-`--filmbox-menu-hover-color` | filmbox menu hover color      | #ccc
+`--menu-color`             | menu background color       | #1d1e25
+`--menu-label-color`       | menu text label color       | #ccc
+`--menu-hover-color`       | menu hover background color | #0087cb
+`--menu-label-hover-color` | menu hover text label color | #fff
 
 -->
 <dom-module id="hh-menu">
@@ -174,6 +175,7 @@ Custom property | Description | Default
             <div class="navBar-flex-left">
                 <ul>
                     <template is="dom-repeat" items="{{menuItems}}" as="items">
+
                         <li class="menuBar-left-menu" on-mouseenter="mouseenterEvent" on-mouseleave="mouseleaveEvent">
                             <paper-icon-item id="{{items.id}}">
                                 <iron-icon icon="{{items.icon}}" slot="item-icon"></iron-icon>
@@ -181,6 +183,7 @@ Custom property | Description | Default
                             </paper-icon-item>
                             <ul class="menu-item-list">
                                 <div class="listbox" role="listbox" style$="width: {{items.size}}px;">
+
                                     <template is="dom-repeat" items="{{items.childNode}}" as="childNode_1">
                                         <template is="dom-if" if="{{!childNode_1.separator}}">
                                             <template is="dom-if" if="{{!childNode_1.childNode}}">
@@ -249,7 +252,7 @@ Custom property | Description | Default
                             return [
                                 {
                                     name: 'Menu',
-                                    icon: 'healthhub:stackView',
+                                    icon: 'vaadin:folder-open',
                                     size: 180,
                                     childNode: [
                                         {
