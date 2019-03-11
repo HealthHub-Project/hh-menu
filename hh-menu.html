@@ -55,9 +55,11 @@ Custom property | Description | Default
 
             nav ul {
                 list-style-type: none;
-                /*position: relative;*/
+                position: relative;
                 margin: 0;
                 padding: 0;
+                height: 100%;
+                z-index: 2;
             }
 
             nav ul li {
@@ -65,7 +67,7 @@ Custom property | Description | Default
                 float: left;
                 margin: 0;
                 padding: 0;
-                z-index: 1;
+                /*z-index: 1;*/
                 height: 100%;
             }
 
@@ -75,6 +77,8 @@ Custom property | Description | Default
                 top: 100%;
                 left: 0;
                 padding: 0;
+                height: 100%;
+                /*z-index: 1;*/
             }
 
             nav ul ul ul {
@@ -82,6 +86,7 @@ Custom property | Description | Default
                 left: 100%;
                 box-shadow: -5px 0px 20px -10px #000000;
                 border-radius: 7px;
+                height: 100%;
             }
 
             .navBar-flex-left {
@@ -121,6 +126,7 @@ Custom property | Description | Default
                 border-bottom-right-radius: 7px;
                 background-color: var(--menu-color);
                 border: 1px solid #4C5667;
+                height: auto;
             }
 
             .menu-item-list > div > paper-icon-item {
@@ -187,7 +193,9 @@ Custom property | Description | Default
                                     <template is="dom-repeat" items="{{items.childNode}}" as="childNode_1">
                                         <template is="dom-if" if="{{!childNode_1.separator}}">
                                             <template is="dom-if" if="{{!childNode_1.childNode}}">
+                                                <div style="height: 100%; width: 100%">
                                                 <hh-menu-item id="{{childNode_1.id}}" item="{{childNode_1}}" on-click="clickEventListener"></hh-menu-item>
+                                                </div>
                                             </template>
 
                                             <template is="dom-if" if="{{childNode_1.childNode}}">
