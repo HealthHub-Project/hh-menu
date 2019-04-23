@@ -88,10 +88,10 @@ Custom property | Description | Default
 
                 ready() {
                     super.ready();
-                    if(this.item && this.item.suppressMenu) {
-                        this.suppressMenu = true;
-                        // this.disabled = true;
-                    }
+                    // if(this.item && this.item.suppressMenu) {
+                    //     this.suppressMenu = true;
+                    // this.disabled = true;
+                    // }
                 }
 
                 static get properties() {
@@ -107,13 +107,13 @@ Custom property | Description | Default
                             value() {
                                 return {
                                     name: 'itesdfsfdsfsdfm',
-                                    icon: 'vaadin:folder'
+                                    icon: 'vaadin:folder',
                                 }
                             }
                         },
                         suppressMenu: {
                             type: Boolean,
-                            value: false
+                            value: false,
                             // observer: '_suppressMenuChanged'
                         }
                     }
@@ -128,7 +128,6 @@ Custom property | Description | Default
                 }
 
                 check() {
-                    console.log(this.active)
                     this.active = true;
                 }
 
@@ -136,13 +135,13 @@ Custom property | Description | Default
                     this.active = false;
                 }
 
-                // _suppressMenuChanged(newValue, oldValue) {
-                //     if(newValue) {
-                //         this.disabled = true;
-                //     }
-                // }
+                inVisibleMenuItem(id) {
+                    this.shadowRoot.querySelector('#' + id).disabled = true;
+                }
+                visibleMenuItem(id) {
+                    this.shadowRoot.querySelector('#' + id).disabled = false;
 
-
+                }
             }
 
             window.customElements.define(HhMenuItem.is, HhMenuItem);

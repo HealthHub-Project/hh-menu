@@ -194,7 +194,7 @@ Custom property | Description | Default
                                         <template is="dom-if" if="{{!childNode_1.separator}}">
                                             <template is="dom-if" if="{{!childNode_1.childNode}}">
                                                 <div style="height: 100%; width: 100%">
-                                                <hh-menu-item id="{{childNode_1.id}}" item="{{childNode_1}}" on-click="clickEventListener"></hh-menu-item>
+                                                    <hh-menu-item id="{{childNode_1.id}}" item="{{childNode_1}}" on-click="clickEventListener"></hh-menu-item>
                                                 </div>
                                             </template>
 
@@ -334,6 +334,16 @@ Custom property | Description | Default
                     e.target.querySelector("ul").style.display = null;
                 }
 
+            }
+
+            inVisibleMenuItem(id) {
+                this.shadowRoot.querySelector('#' + id).suppressMenu = true;
+                this.shadowRoot.querySelector('#' + id).inVisibleMenuItem(id);
+            }
+
+            visibleMenuItem(id) {
+                this.shadowRoot.querySelector('#' + id).suppressMenu = false;
+                this.shadowRoot.querySelector('#' + id).visibleMenuItem(id);
             }
         }
 
