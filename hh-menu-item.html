@@ -106,21 +106,26 @@ Custom property | Description | Default
                             type: Object,
                             value() {
                                 return {
-                                    name: 'itesdfsfdsfsdfm',
+                                    name: 'item',
                                     icon: 'vaadin:folder',
                                 }
                             }
                         },
-                        suppressMenu: {
-                            type: Boolean,
-                            value: false,
-                            // observer: '_suppressMenuChanged'
+                        key: {
+                            type: String,
+                            notify: true,
+                            reflectToAttribute: true
                         }
+
                     }
                 }
 
                 getItemId() {
                     return this.item.id;
+                }
+
+                getItemKey() {
+                    return this.item.key;
                 }
 
                 toggleCheck() {

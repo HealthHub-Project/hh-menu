@@ -127,6 +127,7 @@ Custom property | Description | Default
                 background-color: var(--menu-color);
                 border: 1px solid #4C5667;
                 height: auto;
+                /*width: 110%;*/
             }
 
             .menu-item-list > div > paper-icon-item {
@@ -194,7 +195,7 @@ Custom property | Description | Default
                                         <template is="dom-if" if="{{!childNode_1.separator}}">
                                             <template is="dom-if" if="{{!childNode_1.childNode}}">
                                                 <div style="height: 100%; width: 100%">
-                                                    <hh-menu-item id="{{childNode_1.id}}" item="{{childNode_1}}" on-click="clickEventListener"></hh-menu-item>
+                                                    <hh-menu-item id="{{childNode_1.id}}" key="{{childNode_1.key}}" item="{{childNode_1}}" on-click="clickEventListener"></hh-menu-item>
                                                 </div>
                                             </template>
 
@@ -203,10 +204,10 @@ Custom property | Description | Default
                                                     <iron-icon icon="{{childNode_1.icon}}" slot="item-icon"></iron-icon>
                                                     {{childNode_1.name}}
                                                     <iron-icon class="submenu-caret-right" icon="vaadin:caret-right"></iron-icon>
-                                                    <ul class="menu-item-list" style="border-radius: 7px">
+                                                    <ul id="{{childNode_1.id}}" class="menu-item-list" style="border-radius: 7px">
                                                         <div class="listbox" role="listbox" style$="width: {{childNode_1.size}}px;">
                                                             <template is="dom-repeat" items="{{childNode_1.childNode}}" as="childNode_2">
-                                                                <hh-menu-item id="{{childNode_2.id}}" item="{{childNode_2}}" on-click="clickEventListener"></hh-menu-item>
+                                                                <hh-menu-item id="{{childNode_2.id}}" key="{{childNode_2.key}}" item="{{childNode_2}}" on-click="clickEventListener"></hh-menu-item>
                                                             </template>
                                                         </div>
                                                     </ul>
@@ -303,7 +304,10 @@ Custom property | Description | Default
 
             clickEventListener(e) {
                 if (!e.target.suppressMenu) {
-                    this.dispatchEvent(new CustomEvent('menuItemClickEvent', {detail: {id: e.target.getItemId()}}));
+                    let param = new Object();
+                    param.id = e.target.getItemId();
+                    param.key = e.target.getItemKey();
+                    this.dispatchEvent(new CustomEvent('menuItemClickEvent', {detail: param}));
                     e.target.parentElement.parentElement.style.display = null;
                 }
             }
@@ -321,6 +325,31 @@ Custom property | Description | Default
             // menu item uncheck
             unCheckItem(e) {
                 this.shadowRoot.querySelector('#' + e).unCheck();
+            }
+
+            // menu item check
+            checkItemByKey(e) {
+                this.shadowRoot.querySelector('[key="'+ e +'"]').check();
+
+            }
+            unCheckItemByKey(e) {
+                this.shadowRoot.querySelector('[key="'+ e +'"]').unCheck();
+
+            }
+
+            unCheckAllDDPItem() {
+                for (let menu of this.menuItems) {
+                    if(menu.name === "Display") {
+                        for (let item of menu.childNode) {
+                            if(item.name === "DDP") {
+                                for (let subItem of item.childNode) {
+                                    this.shadowRoot.querySelector('[key="'+ subItem.key +'"]').unCheck();
+                                }
+                            }
+                        }
+                    }
+                }
+
             }
 
             mouseenterEvent(e) {
