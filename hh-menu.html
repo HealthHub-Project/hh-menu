@@ -366,11 +366,17 @@ Custom property | Description | Default
             }
 
             inVisibleMenuItem(id) {
+                if(this.shadowRoot.querySelector('#' + id) === null)
+                    return;
+
                 this.shadowRoot.querySelector('#' + id).suppressMenu = true;
                 this.shadowRoot.querySelector('#' + id).inVisibleMenuItem(id);
             }
 
             visibleMenuItem(id) {
+                if(this.shadowRoot.querySelector('#' + id) === null)
+                    return;
+
                 this.shadowRoot.querySelector('#' + id).suppressMenu = false;
                 this.shadowRoot.querySelector('#' + id).visibleMenuItem(id);
             }
