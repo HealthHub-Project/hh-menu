@@ -314,25 +314,40 @@ Custom property | Description | Default
 
             // menu item toggle check
             toggleCheckItem(e) {
+                if(this.shadowRoot.querySelector('#' + e) === null)
+                    return;
+
                 this.shadowRoot.querySelector('#' + e).toggleCheck();
             }
 
             // menu item check
             checkItem(e) {
+                if(this.shadowRoot.querySelector('#' + e) === null)
+                    return;
+
                 this.shadowRoot.querySelector('#' + e).check();
             }
 
             // menu item uncheck
             unCheckItem(e) {
+                if(this.shadowRoot.querySelector('#' + e) === null)
+                    return;
+
                 this.shadowRoot.querySelector('#' + e).unCheck();
             }
 
             // menu item check
             checkItemByKey(e) {
+                if(this.shadowRoot.querySelector('[key="'+ e +'"]') === null)
+                    return;
+
                 this.shadowRoot.querySelector('[key="'+ e +'"]').check();
 
             }
             unCheckItemByKey(e) {
+                if(this.shadowRoot.querySelector('[key="'+ e +'"]') === null)
+                    return;
+
                 this.shadowRoot.querySelector('[key="'+ e +'"]').unCheck();
 
             }
