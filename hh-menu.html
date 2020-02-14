@@ -385,7 +385,7 @@ Custom property | Description | Default
                     return;
 
                 this.shadowRoot.querySelector('#' + id).suppressMenu = true;
-                this.shadowRoot.querySelector('#' + id).inVisibleMenuItem(id);
+                this.shadowRoot.querySelector('#' + id).inVisibleMenuItemSub(id);
             }
 
             visibleMenuItem(id) {
@@ -393,7 +393,7 @@ Custom property | Description | Default
                     return;
 
                 this.shadowRoot.querySelector('#' + id).suppressMenu = false;
-                this.shadowRoot.querySelector('#' + id).visibleMenuItem(id);
+                this.shadowRoot.querySelector('#' + id).visibleMenuItemSub(id);
             }
         }
 
