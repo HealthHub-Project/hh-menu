@@ -140,12 +140,11 @@ Custom property | Description | Default
                     this.active = false;
                 }
 
-                inVisibleMenuItem(id) {
+                inVisibleMenuItemSub(id) {
                     this.shadowRoot.querySelector('#' + id).disabled = true;
                 }
-                visibleMenuItem(id) {
+                visibleMenuItemSub(id) {
                     this.shadowRoot.querySelector('#' + id).disabled = false;
-
                 }
             }
 
